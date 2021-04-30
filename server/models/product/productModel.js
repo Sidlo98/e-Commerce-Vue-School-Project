@@ -61,9 +61,8 @@ exports.createProduct = (req, res) => {
 
     const newProduct = new Product({
       name: req.body.name,
+      short: req.body.short,
       desc: req.body.desc,
-      category: req.body.category,
-      tags: req.body.tags,
       price: req.body.price,
       image: req.body.image,
     });
