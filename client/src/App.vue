@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-own">
     <Navbar />
     <router-view />
   </div>
@@ -15,4 +15,9 @@ export default {
 }
 
 </script>
-<style></style>
+<style>
+.bg-own {
+  background-color: rgba(51, 51, 51, 0.5)
+}
+
+</style>

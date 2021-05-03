@@ -1,0 +1,46 @@
+<template>
+  <div class="card h-100">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      <img :src="product.image" class="img-fluid" />
+      <router-link :to="'/productdetails' + product._id">
+        <div
+          class="mask"
+          style="background-color: rgba(251, 251, 251, 0.15)"
+        ></div>
+      </router-link>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">
+        {{ product.short }}
+      </p>
+      <hr />
+      <div class="d-flex justify-content-between ">
+        <p class="text">
+          <span class="price-text">
+            {{ product.price }}
+          </span>
+          kr
+        </p>
+        <button class="btn btn-sm btn-secondary">Add To Cart</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "GridItem",
+  props: ["product"],
+};
+</script>
+
+<style scoped>
+.price-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.btn {
+  height: 40px;
+}
+</style>
