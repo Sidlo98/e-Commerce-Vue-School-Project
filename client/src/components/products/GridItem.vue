@@ -2,7 +2,7 @@
   <div class="card h-100">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
       <img :src="product.image" class="img-fluid" />
-      <router-link :to="'/productdetails' + product._id">
+      <router-link :to="{ name: 'ProductDetails', params: { id: product._id } }">
         <div
           class="mask"
           style="background-color: rgba(251, 251, 251, 0.15)"

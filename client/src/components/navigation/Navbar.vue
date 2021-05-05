@@ -60,7 +60,7 @@
               class="dropdown-menu dropdown-menu-end shopping-cart"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              CART
+              <ShoppingCart />
             </ul>
           </li>
 
@@ -89,14 +89,27 @@
 </template>
 
 <script>
+import ShoppingCart from "../shoppingCart/ShoppingCart";
+
 export default {
   name: "Navbar",
-  components: {},
+  components: {
+    ShoppingCart,
+  },
 };
 </script>
 
 <style>
 .collapse .router-link-exact-active {
   text-decoration: underline;
+}
+.shopping-cart {
+  min-width: 450px;
+}
+@media screen and (max-width: 768px) {
+  .shopping-cart {
+    min-width: initial;
+    width: 90% !important;
+  }
 }
 </style>

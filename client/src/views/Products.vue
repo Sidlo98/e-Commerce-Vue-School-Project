@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
-    <div class="d-flex pt-3 p-1 justify-content-between">
+  <div class="container pb-5">
+    <div
+      class="d-flex pt-3 p-1 justify-content-between flex-column  flex-sm-row align-items-center"
+    >
       <div>
-        <div class="btn-group">
+        <div class="btn-group mb-3">
           <input
             type="radio"
             class="btn-check"
@@ -27,11 +29,11 @@
         </div>
       </div>
 
-      <div>
+      <div class="mb-3">
         <form @submit.prevent="handleSubmit">
           <div class="input-group">
             <div class="form-outline bg-light rounded">
-              <input type="search" class="form-control" />
+              <input id="search" type="search" class="form-control" />
             </div>
             <button type="submit" class="btn btn-secondary">
               <i class="fas fa-search"></i>
@@ -41,7 +43,7 @@
       </div>
     </div>
     <div v-if="products">
-      <component :is="comp" :products="products"></component>
+      <component :is="comp" :products="filterdProducts"></component>
     </div>
     <div v-else>
       Loading...
@@ -62,13 +64,19 @@ export default {
     List,
   },
   computed: {
-    ...mapGetters(["products", "comp"]),
+    ...mapGetters(["filterdProducts", "comp", "products"]),
   },
   methods: {
-    ...mapActions(["getProducts", "setComp"]),
+    ...mapActions(["getProducts", "setComp", "setSearchVal", "cleanSearchVal"]),
+    handleSubmit(e) {
+      this.setSearchVal(e.target.search.value);
+    },
   },
   created() {
     this.getProducts();
+  },
+  destroyed() {
+    this.cleanSearchVal();
   },
 };
 </script>
