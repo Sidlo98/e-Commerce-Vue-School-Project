@@ -7,7 +7,9 @@
           data-mdb-ripple-color="light"
         >
           <img :src="product.image" class="img-fluid img-rounded" />
-          <router-link  :to="{ name: 'ProductDetails', params: { id: product._id } }">
+          <router-link
+            :to="{ name: 'ProductDetails', params: { id: product._id } }"
+          >
             <div
               class="mask img-rounded"
               style="background-color: rgba(251, 251, 251, 0.15)"
@@ -25,16 +27,32 @@
             <span class="price-text">{{ product.price }}</span> kr
           </p>
         </div>
-        <button type="button" class="btn btn-secondary">Add To Cart</button>
+        <button
+          @click="addProductToCart({ product, quantity })"
+          type="button"
+          class="btn btn-secondary"
+        >
+          Add To Cart
+        </button>
       </div>
     </div>
   </li>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "ListItem",
   props: ["product"],
+  data() {
+    return {
+      quantity: 1,
+    };
+  },
+  methods: {
+    ...mapActions(["addProductToCart"]),
+  },
 };
 </script>
 

@@ -52,8 +52,10 @@
               aria-expanded="false"
             >
               <i class="fas fa-shopping-cart"></i>
-              <span class="badge rounded-pill badge-notification bg-danger"
-                >1</span
+              <span
+                v-if="cartTotalItems >= 1"
+                class="badge rounded-pill badge-notification bg-danger"
+                >{{ cartTotalItems }}</span
               >
             </a>
             <ul
@@ -90,11 +92,14 @@
 
 <script>
 import ShoppingCart from "../shoppingCart/ShoppingCart";
-
+import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
   components: {
     ShoppingCart,
+  },
+  computed: {
+    ...mapGetters(["cartTotalItems"]),
   },
 };
 </script>

@@ -1,17 +1,15 @@
 <template>
   <div class="p-3 shadow">
-
-    <div v-if="false">
-      
+    <div v-if="cart.length > 0">
+      <CartItem v-for="item in cart" :key="item._id" :item="item" />
     </div>
-
+    
     <div v-else>
       <h4 class="text-center">Your cart is empty</h4>
     </div>
 
-    
-    <hr />
     <div
+      v-if="cart.length > 0"
       class="d-flex justify-content-between align-items-center flex-column flex-lg-row"
     >
       <p>
@@ -21,7 +19,7 @@
         <small class="text-muted">Includes Tax</small>
       </p>
 
-      <button class="btn btn-secondary">
+      <button @click="proceedToCheckout" class="btn btn-secondary">
         Proceed to checkout
       </button>
     </div>
@@ -29,15 +27,24 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
+import router from "../../router"
+import CartItem from "./CartItem";
+
 export default {
   name: "ShoppingCart",
+  components: {
+    CartItem,
+  },
   computed: {
-    ...mapGetters(['cartTotalPrice'])
+    ...mapGetters(["cartTotalPrice", "cart"]),
   },
   methods: {
-    ...mapActions([])
-  }
+    ...mapActions([]),
+    proceedToCheckout() {
+      router.push('/checkout')
+    }
+  },
 };
 </script>
 

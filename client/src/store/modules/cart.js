@@ -4,14 +4,23 @@ export default {
   },
   getters: {
     cart: (state) => state.cart,
-    cartTotalPrice: (state) => {
-      let price = 0
-      if(state.cart.length !== 0) {
+    cartTotalItems: (state) => {
+      let items = 0;
+      if (state.cart.length !== 0) {
         state.cart.forEach((item) => {
-          price += item.product.price * item.quantity
-        })
+          items += item.quantity;
+        });
       }
-      return price
+      return items;
+    },
+    cartTotalPrice: (state) => {
+      let price = 0;
+      if (state.cart.length !== 0) {
+        state.cart.forEach((item) => {
+          price += item.product.price * item.quantity;
+        });
+      }
+      return price;
     },
   },
   mutations: {
@@ -23,6 +32,17 @@ export default {
       }
       state.cart.push({ product, quantity });
     },
+    REMOVE_FROM_CART: (state, product) => {
+      let newCart = state.cart.filter(
+        (item) => item.product._id !== product._id
+      );
+      state.cart = newCart;
+    },
+    REMOVE_ONE_FROM_CART: (state, product) => {
+      let exists = state.cart.find((item) => item.product._id === product._id);
+      exists.quantity -= 1;
+      return;
+    },
   },
   actions: {
     addProductToCart: ({ commit }, { product, quantity }) => {
@@ -31,6 +51,17 @@ export default {
         quantity: Number(quantity),
       };
       commit("ADD_TO_CART", item);
+    },
+    removeProductFromCart: ({ commit }, product) => {
+      commit("REMOVE_FROM_CART", product);
+    },
+    removeOneProductFromCart: ({ commit, dispatch, state }, product) => {
+      let exists = state.cart.find((item) => item.product._id === product._id);
+      if (exists.quantity > 1) {
+        commit("REMOVE_ONE_FROM_CART", product);
+      } else {
+        dispatch("removeProductFromCart", product);
+      }
     },
   },
 };

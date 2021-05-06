@@ -23,18 +23,20 @@
             </p>
           </div>
           <div
-              class="row input-group justify-content-lg-start justify-content-center"
-            >
-              <button class="btn btn-secondary mb-2 col-lg-6 col-6">AddToCart</button>
-              <div class="col-sm-3 col-6">
-                <input
-                  type="number"
-                  min="1"
-                  class="form-control border-secondary"
-                  v-model="quantity"
-                />
-              </div>
+            class="row input-group justify-content-lg-start justify-content-center flex-column flex-lg-row align-items-center align-items-lg-start"
+          >
+            <button @click="addProductToCart({ product, quantity })" class="btn btn-secondary mb-2 col-lg-6 col-8">
+              Add To Cart
+            </button>
+            <div class="col-sm-3 col-6">
+              <input
+                type="number"
+                min="1"
+                class="form-control border-secondary"
+                v-model="quantity"
+              />
             </div>
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +60,7 @@ export default {
     ...mapGetters(["product"]),
   },
   methods: {
-    ...mapActions(["getOneProduct", "cleanOneProduct"]),
+    ...mapActions(["getOneProduct", "cleanOneProduct", 'addProductToCart']),
   },
   created() {
     this.getOneProduct(this.id);
