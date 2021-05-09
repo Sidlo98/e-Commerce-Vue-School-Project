@@ -10,7 +10,7 @@
           />
         </div>
         <div class="col-md-4 mt-4 mt-md-0">
-          <CheckOutOptions />
+          <CheckOutSummary />
         </div>
       </div>
     </div>
@@ -24,14 +24,15 @@
 </template>
 
 <script>
+
 import { mapActions, mapGetters } from "vuex";
 import CheckOutCard from "../components/checkout/CheckOutCard";
-import CheckOutOptions from "../components/checkout/CheckOutOptions";
+import CheckOutSummary from "../components/checkout/CheckOutSummary";
 
 export default {
   name: "CheckOut",
   components: {
-    CheckOutOptions,
+    CheckOutSummary,
     CheckOutCard,
   },
   computed: {

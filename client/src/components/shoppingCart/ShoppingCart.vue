@@ -3,9 +3,9 @@
     <div v-if="cart.length > 0">
       <CartItem v-for="item in cart" :key="item._id" :item="item" />
     </div>
-    
+
     <div v-else>
-      <h4 class="text-center">Your cart is empty</h4>
+      <h5 class="text-center">Your cart is empty</h5>
     </div>
 
     <div
@@ -14,7 +14,7 @@
     >
       <p>
         Total
-        <span>{{ cartTotalPrice }}</span> kr
+        <strong>{{ cartTotalPrice }}</strong> kr
         <br />
         <small class="text-muted">Includes Tax</small>
       </p>
@@ -28,7 +28,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import router from "../../router"
+import router from "../../router";
 import CartItem from "./CartItem";
 
 export default {
@@ -42,8 +42,8 @@ export default {
   methods: {
     ...mapActions([]),
     proceedToCheckout() {
-      router.push('/checkout')
-    }
+      router.push("/checkout");
+    },
   },
 };
 </script>
