@@ -1,7 +1,7 @@
 <template>
   <div class="card h-100">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-      <img :src="product.image" class="img-fluid" />
+      <img :src="product.image" class="img-fluid maxh" />
       <router-link
         :to="{ name: 'ProductDetails', params: { id: product._id } }"
       >
@@ -59,5 +59,9 @@ export default {
 }
 .btn {
   height: 40px;
+}
+.maxh {
+  height: 225px;
+  width: 100%;
 }
 </style>

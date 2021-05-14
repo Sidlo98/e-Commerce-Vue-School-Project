@@ -3,13 +3,18 @@
     <form @submit.prevent="handleSubmit" novalidate>
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
-        <input v-model="email" type="email" :class="invalid" class="form-control" id="email" />
+        <input
+          v-model="email"
+          type="email"
+          :class="invalid"
+          class="form-control"
+          id="email"
+        />
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input
-
           v-model="password"
           type="password"
           :class="invalid"
@@ -27,7 +32,10 @@
         </p>
       </div>
       <p class="text-center">
-        Not a member? <router-link class="text-secondary" to="/register">Register</router-link>
+        Not a member?
+        <router-link class="text-secondary" to="/register"
+          >Register</router-link
+        >
       </p>
     </form>
   </div>
@@ -47,12 +55,12 @@ export default {
   computed: {
     ...mapGetters(["loginErr"]),
     invalid() {
-      if(this.loginErr) {
-        return 'is-invalid'
+      if (this.loginErr) {
+        return "is-invalid";
       } else {
-        return ''
+        return "";
       }
-    }
+    },
   },
   methods: {
     ...mapActions(["login"]),

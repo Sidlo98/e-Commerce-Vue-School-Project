@@ -39,6 +39,7 @@ exports.registerUser = (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         passwordHash: hash,
+        points: 0,
       });
 
       newUser
@@ -111,7 +112,12 @@ exports.addToOrders = (req, res) => {
       });
     }
     if (result) {
-      User.updateOne({ email: req.params.id }, { $push: { orders: req.body } })
+      const points = req.body.totalPrice / 100;
+
+      User.updateOne(
+        { email: req.params.id },
+        { $push: { orders: req.body }, $set: { points: +points } }
+      )
         .then(() => {
           res.status(200).json({
             statusCode: 200,
@@ -126,6 +132,24 @@ exports.addToOrders = (req, res) => {
             message: "Failed to add order.",
           });
         });
+    }
+  });
+};
+exports.getUser = (req, res) => {
+  User.findOne({ email: req.params.id }).then((user) => {
+    if (!user) {
+      return res.status(400).json({
+        statusCode: 400,
+        status: false,
+        message: "You made a bad request.",
+      });
+    } else {
+      return res.status(200).json({
+        statusCode: 200,
+        status: true,
+        message: "Getting user Successfully",
+        user,
+      });
     }
   });
 };

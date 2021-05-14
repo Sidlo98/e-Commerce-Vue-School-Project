@@ -43,6 +43,9 @@ export default {
       exists.quantity -= 1;
       return;
     },
+    CLEAR_CART: (state) => {
+      state.cart = [];
+    },
   },
   actions: {
     addProductToCart: ({ commit }, { product, quantity }) => {
@@ -62,6 +65,9 @@ export default {
       } else {
         dispatch("removeProductFromCart", product);
       }
+    },
+    clearCart: ({ commit }) => {
+      commit("CLEAR_CART");
     },
   },
 };

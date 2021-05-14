@@ -31,6 +31,9 @@ export default {
       state.activeUser = data;
       state.isLoggedIn = true;
     },
+    UPDATE_USER: (state, data) => {
+      state.activeUser = data;
+    },
     LOGOUT_USER: (state) => {
       state.activeUser = {};
       state.isLoggedIn = false;
@@ -64,6 +67,28 @@ export default {
         .catch((err) => {
           commit("SET_LOGIN_ERR", err.response.data);
         });
+    },
+    updateUser: ({ commit, state }) => {
+      axios
+        .get(`http://localhost:9999/users/${state.activeUser.email}`, {
+          headers: { Authorization: "Bearer " + state.activeUser.token },
+        })
+        .then((res) => {
+          commit("UPDATE_USER", {
+            ...res.data.user,
+            token: state.activeUser.token,
+          });
+        });
+    },
+    addOrderToUser: ({ dispatch, state }, order) => {
+      axios.patch(
+        `http://localhost:9999/users/addorder/${state.activeUser.email}`,
+        order,
+        {
+          headers: { Authorization: "Bearer " + state.activeUser.token },
+        }
+      );
+      dispatch("clearCart");
     },
     logout: ({ commit }) => {
       router.push("/");

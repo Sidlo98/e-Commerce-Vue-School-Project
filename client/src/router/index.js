@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store";
 import Home from "../views/Home.vue";
 import Products from "../views/Products.vue";
 import ProductDetails from "../views/ProductDetails.vue";
@@ -7,7 +8,7 @@ import CheckOut from "../views/CheckOut.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
-import MyOrders from "../views/MyOrders.vue";
+import Payment from "../views/Payment.vue";
 
 Vue.use(VueRouter);
 
@@ -32,26 +33,31 @@ const routes = [
     path: "/checkout",
     name: "CheckOut",
     component: CheckOut,
+    meta: { checkCart: true },
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    component: Payment,
+    meta: { checkCart: true },
   },
   {
     path: "/login",
     name: "Login",
     component: Login,
+    meta: { loggedIn: true },
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
+    meta: { loggedIn: true },
   },
   {
     path: "/profile",
     name: "Profile",
     component: Profile,
-  },
-  {
-    path: "/myorders",
-    name: "MyOrders",
-    component: MyOrders,
+    meta: { authorize: true },
   },
   {
     path: "/about",
@@ -70,4 +76,38 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const { authorize } = to.meta;
+  const { checkCart } = to.meta;
+  const { loggedIn } = to.meta;
+
+  const isLoggedIn = store.getters.isLoggedIn;
+  const cartContains = store.getters.cart.length;
+
+  if (loggedIn) {
+    if (isLoggedIn) {
+      next({ path: "/profile", query: { redirect: to.fullPath } });
+    }
+  } else {
+
+    next();
+  }
+
+  if (checkCart) {
+    if (cartContains === 0) {
+      next({ path: "/products", query: { redirect: to.fullPath } });
+    }
+  } else {
+    next();
+  }
+
+  if (authorize) {
+    if (!isLoggedIn) {
+      next({ path: "/login", query: { redirect: to.fullPath } });
+    } else {
+      next();
+    }
+  }
+  next();
+});
 export default router;

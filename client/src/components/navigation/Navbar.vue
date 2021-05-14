@@ -86,11 +86,6 @@
                   >My profile</router-link
                 >
               </li>
-              <li class="text-center mt-2">
-                <router-link class="profile-links text-secondary" to="/myorders"
-                  >My orders</router-link
-                >
-              </li>
               <li class="text-center mt-2 mb-2">
                 <p @click="logout" class="profile-links text-secondary" to="/">
                   Log out
@@ -101,7 +96,7 @@
 
           <li v-else class="nav-item dropdown">
             <router-link to="/login" class="nav-link">
-              <i class="fas fa-user"></i>
+              <i class="far fa-user"></i>
             </router-link>
           </li>
         </ul>

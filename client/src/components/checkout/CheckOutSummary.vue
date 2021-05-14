@@ -1,11 +1,11 @@
 <template>
-  <div class="card p-3">
+  <div class="card p-3 mb-5">
     <h3 class="text-center border-secondary border-bottom">
       Preview your order
     </h3>
     <ul class="list-group list-group-flush">
       <li class="list-group-item" v-for="item in cart" :key="item._id">
-        <p>{{ item.product.name }}</p>
+        <p class="text-start">{{ item.product.name }}</p>
         <div class="d-flex justify-content-between">
           <p class="text-muted">
             {{ item.quantity }} X {{ item.product.price }}
@@ -54,7 +54,17 @@
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">...</div>
+            <div class="modal-body">
+              If you create an account
+              <a
+                @click="toRegister"
+                class="text-secondary"
+                data-mdb-dismiss="modal"
+                >here</a
+              >
+              you will be able to score points of you purchases and list your
+              previous orders here on the site.
+            </div>
             <div class="modal-footer">
               <button
                 type="button"
@@ -85,13 +95,8 @@ import router from "../../router";
 
 export default {
   name: "CheckOutSummary",
-  data() {
-    return {
-      isLoggedIn: false,
-    };
-  },
   computed: {
-    ...mapGetters(["cart", "cartTotalPrice"]),
+    ...mapGetters(["cart", "cartTotalPrice", "isLoggedIn"]),
     modal() {
       if (this.isLoggedIn) {
         return "none";
@@ -102,15 +107,22 @@ export default {
   },
   methods: {
     proccedToPaymentWithNoAccount() {
-      router.push("/");
+      router.push("/payment");
     },
     proccedToPayment() {
       if (this.isLoggedIn) {
-        router.push("/");
+        router.push("/payment");
       }
+    },
+    toRegister() {
+      router.push("/register");
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+a {
+  cursor: pointer;
+}
+</style>
