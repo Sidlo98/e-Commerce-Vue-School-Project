@@ -6,7 +6,7 @@ router.get("/:id", productModul.getProduct);
 
 router.post("/new", productModul.createProduct);
 
-router.patch("/:id", productModul.updateProduct);
+router.patch("/:id",  productModul.updateProduct);
 
 router.delete("/:id", productModul.deleteProduct);
 

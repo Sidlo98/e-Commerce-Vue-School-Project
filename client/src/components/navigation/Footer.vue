@@ -4,9 +4,11 @@
       <section class="">
         <p class="d-flex justify-content-center align-items-center">
           <span class="me-3">Register for free </span>
+          <router-link to="/register">
           <button type="button" class="btn btn-outline-light btn-rounded">
             Sign up!
           </button>
+          </router-link>
         </p>
       </section>
     </div>

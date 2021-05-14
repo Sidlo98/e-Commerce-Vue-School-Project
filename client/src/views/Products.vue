@@ -43,7 +43,7 @@
       </div>
     </div>
     <div v-if="products">
-      <component :is="comp" :products="filterdProducts"></component>
+      <component :is="comp" :products="filterdProducts" />
     </div>
     <div v-else>
       Loading...

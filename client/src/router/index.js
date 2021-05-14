@@ -4,6 +4,11 @@ import Home from "../views/Home.vue";
 import Products from "../views/Products.vue";
 import ProductDetails from "../views/ProductDetails.vue";
 import CheckOut from "../views/CheckOut.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import Profile from "../views/Profile.vue";
+import MyOrders from "../views/MyOrders.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -27,6 +32,26 @@ const routes = [
     path: "/checkout",
     name: "CheckOut",
     component: CheckOut,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+  },
+  {
+    path: "/myorders",
+    name: "MyOrders",
+    component: MyOrders,
   },
   {
     path: "/about",

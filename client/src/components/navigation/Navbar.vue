@@ -66,7 +66,7 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
+          <li v-if="isLoggedIn" class="nav-item dropdown">
             <a
               class="nav-link"
               href="#"
@@ -81,8 +81,28 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              USER SETTINGS
+              <li class="text-center mt-2">
+                <router-link class="profile-links text-secondary" to="/profile"
+                  >My profile</router-link
+                >
+              </li>
+              <li class="text-center mt-2">
+                <router-link class="profile-links text-secondary" to="/myorders"
+                  >My orders</router-link
+                >
+              </li>
+              <li class="text-center mt-2 mb-2">
+                <p @click="logout" class="profile-links text-secondary" to="/">
+                  Log out
+                </p>
+              </li>
             </ul>
+          </li>
+
+          <li v-else class="nav-item dropdown">
+            <router-link to="/login" class="nav-link">
+              <i class="fas fa-user"></i>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -92,14 +112,17 @@
 
 <script>
 import ShoppingCart from "../shoppingCart/ShoppingCart";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Navbar",
   components: {
     ShoppingCart,
   },
   computed: {
-    ...mapGetters(["cartTotalItems"]),
+    ...mapGetters(["cartTotalItems", "isLoggedIn"]),
+  },
+  methods: {
+    ...mapActions(["logout"]),
   },
 };
 </script>
@@ -116,5 +139,10 @@ export default {
     min-width: initial;
     width: 90% !important;
   }
+}
+.profile-links {
+  text-decoration: none !important;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 </style>
