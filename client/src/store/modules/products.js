@@ -8,6 +8,12 @@ export default {
   },
   getters: {
     products: (state) => state.products,
+    latestProducts: (state) => {
+      return state.products.slice(
+        state.products.length - 3,
+        state.products.length
+      );
+    },
     product: (state) => state.product,
     comp: (state) => state.comp,
     filterdProducts: (state) => {
@@ -27,7 +33,7 @@ export default {
       state.searchVal = val;
     },
     CLEAN_SEARCH_VAL: (state) => {
-      state.searchVal = ""
+      state.searchVal = "";
     },
     SET_ONE_PRODUCT: (state, product) => {
       state.product = product;
@@ -47,8 +53,8 @@ export default {
     setSearchVal: ({ commit }, val) => {
       commit("SET_SEARCH_VAL", val);
     },
-    cleanSearchVal: ({ commit}) => {
-      commit("CLEAN_SEARCH_VAL")
+    cleanSearchVal: ({ commit }) => {
+      commit("CLEAN_SEARCH_VAL");
     },
     getOneProduct: async ({ commit }, id) => {
       const res = await axios.get("http://localhost:9999/api/products/" + id);
