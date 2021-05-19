@@ -113,10 +113,10 @@ exports.addToOrders = (req, res) => {
     }
     if (result) {
       const points = req.body.totalPrice / 100;
-
+      console.log()
       User.updateOne(
         { email: req.params.id },
-        { $push: { orders: req.body }, $set: { points: +points } }
+        { $push: { orders: req.body }, $inc: { points: +points } }
       )
         .then(() => {
           res.status(200).json({

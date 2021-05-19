@@ -9,6 +9,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Payment from "../views/Payment.vue";
+import OrderConfirmation from "../views/OrderConfirmation.vue";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     name: "Payment",
     component: Payment,
     meta: { checkCart: true },
+  },
+  {
+    path: "/orderconfirmation",
+    name: "OrderConfirmation",
+    component: OrderConfirmation,
   },
   {
     path: "/login",
@@ -89,12 +95,11 @@ router.beforeEach((to, from, next) => {
       next({ path: "/profile", query: { redirect: to.fullPath } });
     }
   } else {
-
     next();
   }
 
   if (checkCart) {
-    if (cartContains === 0) {
+    if (!cartContains) {
       next({ path: "/products", query: { redirect: to.fullPath } });
     }
   } else {

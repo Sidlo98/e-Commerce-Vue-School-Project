@@ -7,12 +7,14 @@ export default {
     activeUser: {},
     regErr: "",
     loginErr: "",
+    orderErr: "",
   },
   getters: {
     isLoggedIn: (state) => state.isLoggedIn,
     activeUser: (state) => state.activeUser,
     regErr: (state) => state.regErr,
     loginErr: (state) => state.loginErr,
+    orderErr: (state) => state.orderErr,
   },
   mutations: {
     SET_REG_ERR: (state, data) => {
@@ -20,6 +22,12 @@ export default {
     },
     CLEAR_REG_ERR: (state) => {
       state.regErr = "";
+    },
+    SET_ORDER_ERR: (state, data) => {
+      state.orderErr = data;
+    },
+    CLEAR_ORDER_ERR: (state) => {
+      state.orderErr = "";
     },
     SET_LOGIN_ERR: (state, data) => {
       state.loginErr = data;
@@ -80,22 +88,35 @@ export default {
           });
         });
     },
-    addOrderToUser: ({ dispatch, state }, order) => {
-      axios.patch(
-        `http://localhost:9999/users/addorder/${state.activeUser.email}`,
-        order,
-        {
-          headers: { Authorization: "Bearer " + state.activeUser.token },
-        }
-      );
-      dispatch("clearCart");
+    addOrderToUser: ({ dispatch, commit, state }, order) => {
+      axios
+        .patch(
+          `http://localhost:9999/users/addorder/${state.activeUser.email}`,
+          order,
+          {
+            headers: { Authorization: "Bearer " + state.activeUser.token },
+          }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch("clearCart");
+            commit("CLEAR_ORDER_ERR");
+            router.push("/orderConfirmation");
+          }
+        })
+        .catch((err) => {
+          commit("SET_ORDER_ERR", err);
+        });
     },
     logout: ({ commit }) => {
       router.push("/");
       commit("LOGOUT_USER");
     },
-    clearErr: ({ commit }) => {
+    clearRegErr: ({ commit }) => {
       commit("CLEAR_REG_ERR");
+    },
+    clearOrderErr: ({ commit }) => {
+      commit("CLEAR_ORDER_ERR");
     },
   },
 };

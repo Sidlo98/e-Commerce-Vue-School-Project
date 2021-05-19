@@ -100,7 +100,7 @@ export default {
     ...mapGetters(["regErr"]),
   },
   methods: {
-    ...mapActions(["register", "clearErr"]),
+    ...mapActions(["register", "clearRegErr"]),
     handleSubmit() {
       if (!nameValidation(this.user.firstName)) {
         this.fnameClass = "is-invalid";
@@ -134,7 +134,7 @@ export default {
     },
   },
   destroyed() {
-    this.clearErr();
+    this.clearRegErr();
   },
 };
 </script>

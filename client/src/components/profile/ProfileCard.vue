@@ -3,7 +3,7 @@
     <h2>{{ user.firstName }} {{ user.lastName }}</h2>
     <hr />
     <p>Email: {{ user.email }}</p>
-    <strong>Your saved ShoePoints: {{ user.points }}</strong>
+    <strong>Your saved ShoePoints: {{ Math.floor(user.points) }}</strong>
   </div>
 </template>
 

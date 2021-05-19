@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import router from "../router";
+import { mapGetters } from "vuex";
 import CheckOutCard from "../components/checkout/CheckOutCard";
 import CheckOutSummary from "../components/checkout/CheckOutSummary";
 
@@ -28,11 +29,24 @@ export default {
     CheckOutSummary,
     CheckOutCard,
   },
+  data() {
+    return {
+      updateData: this.cartTotalItems,
+    };
+  },
   computed: {
-    ...mapGetters(["cart"]),
+    ...mapGetters(["cartTotalItems", "cart"]),
   },
   methods: {
-    ...mapActions([]),
+    checkEmpty() {
+      console.log("hej");
+      if (this.cartTotalItems === 0) {
+        router.push("/products");
+      }
+    },
+  },
+  beforeUpdate() {
+    this.checkEmpty();
   },
 };
 </script>

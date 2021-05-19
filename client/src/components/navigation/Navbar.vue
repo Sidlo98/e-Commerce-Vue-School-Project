@@ -62,7 +62,7 @@
               class="dropdown-menu dropdown-menu-end shopping-cart"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <ShoppingCart />
+              <ShoppingCart v-if="cartTotalItems >= 1" />
             </ul>
           </li>
 
