@@ -62,7 +62,7 @@
                 data-mdb-dismiss="modal"
                 >here</a
               >
-              you will be able to score points of you purchases and list your
+              you will be able to score points on your purchases and list your
               previous orders here on the site.
             </div>
             <div class="modal-footer">
