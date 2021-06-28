@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.BACKEND_URL
+const BASE_URL = 'https://e-commerce-vue-school-project.herokuapp.com'
 
 export default {
   state: {
