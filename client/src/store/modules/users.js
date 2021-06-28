@@ -1,7 +1,7 @@
 import axios from "axios";
 import router from "@/router";
 
-const BASE_URL = process.env.BASE_URL_TO_BACKEND
+const BASE_URL = process.env.BACKEND
 
 export default {
   state: {

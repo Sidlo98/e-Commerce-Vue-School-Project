@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = process.env.BASE_URL_TO_BACKEND
+const BASE_URL = process.env.BACKEND
 
 export default {
   state: {
