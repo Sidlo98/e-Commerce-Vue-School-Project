@@ -106,8 +106,7 @@
 </template>
 
 <script>
-
-import ShoppingCart from "../shoppingcart/CartMenu";
+import ShoppingCart from "../cart/ShoppingCart";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Navbar",
