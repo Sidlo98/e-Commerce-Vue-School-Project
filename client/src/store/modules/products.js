@@ -1,4 +1,7 @@
 import axios from "axios";
+
+const BASE_URL = process.env.BASE_URL
+
 export default {
   state: {
     products: [],
@@ -44,7 +47,7 @@ export default {
   },
   actions: {
     getProducts: async ({ commit }) => {
-      const res = await axios.get("http://localhost:9999/api/products");
+      const res = await axios.get(`${BASE_URL}/api/products`);
       commit("SET_PRODUCTS", res.data);
     },
     setComp: ({ commit }, val) => {
@@ -57,7 +60,7 @@ export default {
       commit("CLEAN_SEARCH_VAL");
     },
     getOneProduct: async ({ commit }, id) => {
-      const res = await axios.get("http://localhost:9999/api/products/" + id);
+      const res = await axios.get(`${BASE_URL}/api/products/` + id);
       commit("SET_ONE_PRODUCT", res.data);
     },
     cleanOneProduct: ({ commit }) => {

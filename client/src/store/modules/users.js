@@ -1,6 +1,8 @@
 import axios from "axios";
 import router from "@/router";
 
+const BASE_URL = process.env.BASE_URL
+
 export default {
   state: {
     isLoggedIn: false,
@@ -50,7 +52,7 @@ export default {
   actions: {
     register: ({ dispatch, commit }, _user) => {
       axios
-        .post("http://localhost:9999/users/register", _user)
+        .post(`${BASE_URL}/users/register`, _user)
         .then((res) => {
           if (res.status === 201) {
             commit("CLEAR_REG_ERR");
@@ -63,7 +65,7 @@ export default {
     },
     login: ({ commit }, { email, password }) => {
       axios
-        .post("http://localhost:9999/users/login", {
+        .post(`${BASE_URL}/users/login`, {
           email,
           password,
         })
@@ -78,7 +80,7 @@ export default {
     },
     updateUser: ({ commit, state }) => {
       axios
-        .get(`http://localhost:9999/users/${state.activeUser.email}`, {
+        .get(`${BASE_URL}/users/${state.activeUser.email}`, {
           headers: { Authorization: "Bearer " + state.activeUser.token },
         })
         .then((res) => {
@@ -91,7 +93,7 @@ export default {
     addOrderToUser: ({ dispatch, commit, state }, order) => {
       axios
         .patch(
-          `http://localhost:9999/users/addorder/${state.activeUser.email}`,
+          `${BASE_URL}/users/addorder/${state.activeUser.email}`,
           order,
           {
             headers: { Authorization: "Bearer " + state.activeUser.token },
