@@ -30,7 +30,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Carousel from "../components/landingPage/Carousel";
+import Carousel from "../components/landingpage/Carousel";
 export default {
   name: "Home",
   components: {
