@@ -1,5 +1,7 @@
 # e-Commerce-Vue-School-Project
 
+https://sidloshoestore.netlify.app/
+
 In this assignment, you will build a very simple ecommerce page that is made in Vue.
 
 To pass approved, do the following:
